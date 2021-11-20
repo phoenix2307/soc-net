@@ -1,26 +1,23 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Header from "./Components/Header/Header";
+import Navbar from "./Components/Navbar/Navbar";
+import Profile from "./Components/Profile/Profile";
+import Dialogs from "./Components/Dialogs/Dialogs";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <div className="app-wrapper">
+            <Header/>
+            <Navbar/>
+            <div className='app-wrapper-content'>
+                <Dialogs/>
+            </div>
+            {/*<Profile/>*/}
+
+        </div>
+    );
 }
 
 export default App;
