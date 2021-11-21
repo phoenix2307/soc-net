@@ -9,13 +9,19 @@
 
 .dialogsItems .dialog {
     padding: 5px;
+
 }
 
-/*
-.active {
+.dialog a {
+    color: #1d1b57;
+    text-decoration: none;
+
+}
+
+.dialog a.activeLink {
     color: gold;
 }
-*/
+
 
 .messages {
     padding: 10px;
@@ -24,3 +30,4 @@
 .messages .message {
     padding: 3px;
 }
+

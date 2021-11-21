@@ -1,19 +1,15 @@
 import React from "react";
 import s from './Profile.module.css';
 import MyPosts from "./MyPosts/MyPosts";
+import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
 const Profile = () => {
     return (
         <div>
-            <div>
-                <img className={s.image}
-                     src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpNOth8Kc6hxadZ1MvQWLGCLlAiQ2v8C8T8Q&usqp=CAU'/>
-            </div>
-            <div>
-                ava + description
-            </div>
+            <ProfileInfo/>
             <MyPosts/>
-        </div>)
+        </div>
+    )
 }
 
 export default Profile;
