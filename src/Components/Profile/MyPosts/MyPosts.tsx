@@ -16,6 +16,8 @@ function MyPosts() {
         {id: 3, message: 'Hi, how are you my friend?', likesCount: '55'},
     ]
 
+    const postElements = postsData.map( p => <Post id={p.id} message={p.message} likesCount={p.likesCount}/> )
+
     return (
         <div className={s.postBlock}>
             <h3>My posts</h3>
@@ -26,10 +28,7 @@ function MyPosts() {
                 <button>Add post</button>
             </div>
             <div className={s.posts}>
-                <Post id={postsData[0].id} message={postsData[0].message} likesCount={postsData[0].likesCount}/>
-                <Post id={postsData[1].id} message={postsData[1].message} likesCount={postsData[1].likesCount}/>
-                <Post id={postsData[2].id} message={postsData[2].message} likesCount={postsData[2].likesCount}/>
-                <Post id={postsData[3].id} message={postsData[3].message} likesCount={postsData[3].likesCount}/>
+                {postElements}
             </div>
         </div>
 
