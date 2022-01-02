@@ -6,16 +6,26 @@ import {PostsDataType} from "../../../redux/state";
 
 function MyPosts(props: PostsDataType) {
 
-    const postElements = props.postsData.map( p => <Post id={p.id} message={p.message} likesCount={p.likesCount}/> )
+    const postElements = props.postsData.map( p => <Post
+        id={p.id}
+        message={p.message}
+        likesCount={p.likesCount}/> )
+
+    const newPostElement: React.RefObject<HTMLTextAreaElement> = React.createRef()
+
+    const addPost = () => {
+        let textPost = newPostElement.current?.value;
+        alert(textPost)
+    }
 
     return (
         <div className={s.postBlock}>
             <h3>My posts</h3>
             <div>
-                <textarea></textarea>
+                <textarea ref={newPostElement}></textarea>
             </div>
             <div>
-                <button>Add post</button>
+                <button onClick={addPost}>Add post</button>
             </div>
             <div className={s.posts}>
                 {postElements}
