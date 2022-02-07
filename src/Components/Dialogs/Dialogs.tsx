@@ -1,7 +1,16 @@
 import React from "react";
 import s from './Dialogs.module.css'
 import {NavLink} from "react-router-dom";
-import {DialogPagePropsType, DialogPropsType, MessagesPropsType} from "../../redux/state";
+
+export type DialogPagePropsType = {
+    dialogsData: Array<DialogPropsType>
+    messageData: Array<MessagesPropsType>
+}
+
+export type DialogPropsType = {
+    id: number
+    name: string
+}
 
 const DialogItem = (props: DialogPropsType) => {
     let path = '/dialogs/' + props.id;
@@ -13,6 +22,11 @@ const DialogItem = (props: DialogPropsType) => {
             </NavLink>
         </div>
     )
+}
+
+export type MessagesPropsType = {
+    id: number
+    message: string
 }
 
 const Message = (props: MessagesPropsType) => {

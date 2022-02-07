@@ -1,28 +1,35 @@
 import React from "react";
 import s from './MyPosts.module.css';
-import Post from "./Post/Post";
-import {PostsDataType} from "../../../redux/state";
+import Post, {PostType} from "./Post/Post";
 
 
-function MyPosts(props: PostsDataType) {
+export type MyPostsType = {
+    posts: PostType[]
+    addPost: (textPost: string) => void
+}
 
-    const postElements = props.postsData.map( p => <Post
+function MyPosts(props: MyPostsType) {
+
+    const postElements = props.posts.map( p => <Post
         id={p.id}
         message={p.message}
         likesCount={p.likesCount}/> )
 
-    const newPostElement: React.RefObject<HTMLTextAreaElement> = React.createRef()
+    let newPostElement = React.createRef<HTMLTextAreaElement>()
 
     const addPost = () => {
-        let textPost = newPostElement.current?.value;
-        alert(textPost)
+        let textPost = newPostElement.current?.value
+        if (textPost) {
+            props.addPost(textPost)
+        }
     }
 
     return (
         <div className={s.postBlock}>
             <h3>My posts</h3>
             <div>
-                <textarea ref={newPostElement}></textarea>
+                <textarea ref={newPostElement}>
+                </textarea>
             </div>
             <div>
                 <button onClick={addPost}>Add post</button>

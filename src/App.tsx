@@ -2,16 +2,21 @@ import React from 'react';
 import './App.css';
 import Header from "./Components/Header/Header";
 import Navbar from "./Components/Navbar/Navbar";
-import Profile from "./Components/Profile/Profile";
-import Dialogs from "./Components/Dialogs/Dialogs";
+import Profile, {ProfilePropsType} from "./Components/Profile/Profile";
+import Dialogs, {DialogPagePropsType} from "./Components/Dialogs/Dialogs";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import News from "./Components/News/News";
 import Music from "./Components/Music/Music";
 import Settings from "./Components/Settings/Settings";
-import {StatePropsType} from "./redux/state";
+
+export type StatePropsType ={
+    dialogPage:  DialogPagePropsType
+    profilePage: ProfilePropsType
+}
 
 type AppStatePropsType = {
     state: StatePropsType
+    addPost: (textPost: string) => void
 }
 const App = (props: AppStatePropsType) => {
     return (
@@ -22,7 +27,8 @@ const App = (props: AppStatePropsType) => {
                 <div className='app-wrapper-content'>
                     <Routes>
                         <Route path='/profile/*' element={<Profile
-                            postsData={props.state.profilePage.postsData}/>}/>
+                            posts={props.state.profilePage.postsData}
+                            addPost={props.addPost}/>}/>
                         <Route path='/dialogs/*' element={<Dialogs
                             dialogsData={props.state.dialogPage.dialogsData}
                             messageData={props.state.dialogPage.messageData}/>}/>
