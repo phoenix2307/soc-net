@@ -1,4 +1,5 @@
 import {StatePropsType} from "../App";
+import {rerenderEntireTree} from "../Render";
 
 
 export let state: StatePropsType = {
@@ -29,8 +30,9 @@ export let state: StatePropsType = {
 }
 
 export const addPost = (textPost: string) => {
-    let newPost = {
+    const newPost = {
         id: 4, message: textPost, likesCount: '0'
     }
     state.profilePage.postsData.push(newPost)
+    rerenderEntireTree(state)
 }

@@ -17,7 +17,7 @@ function MyPosts(props: MyPostsType) {
 
     let newPostElement = React.createRef<HTMLTextAreaElement>()
 
-    const addPost = () => {
+    const onClickHandler = () => {
         let textPost = newPostElement.current?.value
         if (textPost) {
             props.addPost(textPost)
@@ -32,7 +32,7 @@ function MyPosts(props: MyPostsType) {
                 </textarea>
             </div>
             <div>
-                <button onClick={addPost}>Add post</button>
+                <button onClick={onClickHandler}>Add post</button>
             </div>
             <div className={s.posts}>
                 {postElements}
