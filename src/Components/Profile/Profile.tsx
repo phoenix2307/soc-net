@@ -7,10 +7,13 @@ import {PostType} from "./MyPosts/Post/Post";
 
 export type ProfilePropsType = {
     postsData: PostType[]
+    newPostText: string
 }
 
 type PropsType = {
     posts: PostType[]
+    updateNewPostText: (newText: string) => void
+    newPostText: string
     addPost: (textPost: string) => void
 }
 const Profile = (props: PropsType) => {
@@ -19,7 +22,9 @@ const Profile = (props: PropsType) => {
         <div>
             <ProfileInfo/>
             <MyPosts posts={props.posts}
-            addPost={props.addPost}/>
+                     newPostText={props.newPostText}
+                     updateNewPostText={props.updateNewPostText}
+                     addPost={props.addPost}/>
         </div>
     )
 }

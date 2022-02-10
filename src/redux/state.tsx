@@ -1,9 +1,11 @@
 import {StatePropsType} from "../App";
-import {rerenderEntireTree} from "../Render";
 
+let rerenderEntireTreeForState = (param: StatePropsType) => {
 
-export let state: StatePropsType = {
-    dialogPage:{
+}
+
+export const state: StatePropsType = {
+    dialogPage: {
         dialogsData: [
             {id: 1, name: 'Dimych'},
             {id: 2, name: 'Andrey'},
@@ -25,8 +27,10 @@ export let state: StatePropsType = {
             {id: 1, message: 'Hi, how are you?', likesCount: '12'},
             {id: 2, message: 'Hi, how are you?', likesCount: '2'},
             {id: 3, message: 'Hi, how are you my friend?', likesCount: '55'}
-        ]
-    }
+        ],
+        newPostText: 'IT-Kamasutra.com'
+    },
+    sidebar: {}
 }
 
 export const addPost = (textPost: string) => {
@@ -34,5 +38,15 @@ export const addPost = (textPost: string) => {
         id: 4, message: textPost, likesCount: '0'
     }
     state.profilePage.postsData.push(newPost)
-    rerenderEntireTree(state)
+    state.profilePage.newPostText = ''
+    rerenderEntireTreeForState(state)
+}
+
+export const updateNewPostText = (newText: string) => {
+    state.profilePage.newPostText = newText
+    rerenderEntireTreeForState(state)
+}
+
+export const subscribe = (observer:any) => { //need to fix
+    rerenderEntireTreeForState = observer
 }

@@ -5,15 +5,17 @@ import Post, {PostType} from "./Post/Post";
 
 export type MyPostsType = {
     posts: PostType[]
+    newPostText: string
     addPost: (textPost: string) => void
+    updateNewPostText: (newText: string) => void
 }
 
 function MyPosts(props: MyPostsType) {
 
-    const postElements = props.posts.map( p => <Post
+    const postElements = props.posts.map(p => <Post
         id={p.id}
         message={p.message}
-        likesCount={p.likesCount}/> )
+        likesCount={p.likesCount}/>)
 
     let newPostElement = React.createRef<HTMLTextAreaElement>()
 
@@ -24,11 +26,21 @@ function MyPosts(props: MyPostsType) {
         }
     }
 
+    const onChangeHandler = () => {
+        let newText =  newPostElement.current?.value
+        if(newText){
+            props.updateNewPostText(newText)
+        }
+    }
+
     return (
         <div className={s.postBlock}>
             <h3>My posts</h3>
             <div>
-                <textarea ref={newPostElement}>
+                <textarea onChange={onChangeHandler}
+                          ref={newPostElement}
+                          value={props.newPostText}
+                >
                 </textarea>
             </div>
             <div>

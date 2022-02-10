@@ -9,13 +9,15 @@ import News from "./Components/News/News";
 import Music from "./Components/Music/Music";
 import Settings from "./Components/Settings/Settings";
 
-export type StatePropsType ={
-    dialogPage:  DialogPagePropsType
+export type StatePropsType = {
+    dialogPage: DialogPagePropsType
     profilePage: ProfilePropsType
+    sidebar: {}
 }
 
 type AppStatePropsType = {
     state: StatePropsType
+    updateNewPostText: (newText: string) => void
     addPost: (textPost: string) => void
 }
 const App = (props: AppStatePropsType) => {
@@ -28,6 +30,8 @@ const App = (props: AppStatePropsType) => {
                     <Routes>
                         <Route path='/profile/*' element={<Profile
                             posts={props.state.profilePage.postsData}
+                            updateNewPostText={props.updateNewPostText}
+                            newPostText={props.state.profilePage.newPostText}
                             addPost={props.addPost}/>}/>
                         <Route path='/dialogs/*' element={<Dialogs
                             dialogsData={props.state.dialogPage.dialogsData}
