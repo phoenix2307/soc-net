@@ -1,10 +1,15 @@
 import {StatePropsType} from "../App";
 
-let rerenderEntireTreeForState = (param: StatePropsType) => {
-
+type StoreType = {
+    _state: StatePropsType
+    getState: () => StatePropsType
+    _callSubscriber: () => void
+    addPost: (textPost: string) => void
+    updateNewPostText: (newText: string) => void
+    subscribe: (callback: () => void) => void
 }
-
-export const state: StatePropsType = {
+export const store: StoreType = {
+    _state: {
     dialogPage: {
         dialogsData: [
             {id: 1, name: 'Dimych'},
@@ -31,22 +36,30 @@ export const state: StatePropsType = {
         newPostText: 'IT-Kamasutra.com'
     },
     sidebar: {}
-}
-
-export const addPost = (textPost: string) => {
-    const newPost = {
-        id: 4, message: textPost, likesCount: '0'
+},
+    getState() {
+        return this._state
+    },
+    _callSubscriber() {},
+    addPost (textPost: string) {
+        const newPost = {id: 4, message: textPost, likesCount: '0'}
+        this._state.profilePage.postsData.push(newPost)
+        this._state.profilePage.newPostText = ''
+        this._callSubscriber()
+    },
+    updateNewPostText (newText: string) {
+        this._state.profilePage.newPostText = newText
+        this._callSubscriber()
+    },
+    subscribe (callback) {
+        this._callSubscriber = callback
     }
-    state.profilePage.postsData.push(newPost)
-    state.profilePage.newPostText = ''
-    rerenderEntireTreeForState(state)
 }
 
-export const updateNewPostText = (newText: string) => {
-    state.profilePage.newPostText = newText
-    rerenderEntireTreeForState(state)
-}
 
-export const subscribe = (observer:any) => { //need to fix
-    rerenderEntireTreeForState = observer
-}
+
+
+
+
+
+
