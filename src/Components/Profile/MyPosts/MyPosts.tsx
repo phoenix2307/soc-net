@@ -1,13 +1,13 @@
 import React from "react";
 import s from './MyPosts.module.css';
 import Post, {PostType} from "./Post/Post";
+import {GlobalActionType} from "../../../redux/state";
 
 
 export type MyPostsType = {
     posts: PostType[]
     newPostText: string
-    addPost: (textPost: string) => void
-    updateNewPostText: (newText: string) => void
+    dispatch: (action: GlobalActionType) => void
 }
 
 function MyPosts(props: MyPostsType) {
@@ -22,14 +22,14 @@ function MyPosts(props: MyPostsType) {
     const onClickHandler = () => {
         let textPost = newPostElement.current?.value
         if (textPost) {
-            props.addPost(textPost)
+            props.dispatch({type: 'ADD-POST', textPost})
         }
     }
 
     const onChangeHandler = () => {
         let newText =  newPostElement.current?.value
         if(newText){
-            props.updateNewPostText(newText)
+            props.dispatch({type: 'UPDATE-NEW-POST-TEXT', newText})
         }
     }
 

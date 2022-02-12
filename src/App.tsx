@@ -8,6 +8,7 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import News from "./Components/News/News";
 import Music from "./Components/Music/Music";
 import Settings from "./Components/Settings/Settings";
+import {GlobalActionType, store} from "./redux/state";
 
 export type StatePropsType = {
     dialogPage: DialogPagePropsType
@@ -17,8 +18,7 @@ export type StatePropsType = {
 
 type AppStatePropsType = {
     state: StatePropsType
-    updateNewPostText: (newText: string) => void
-    addPost: (textPost: string) => void
+    dispatch: (action: GlobalActionType) => void
 }
 const App = (props: AppStatePropsType) => {
     return (
@@ -28,11 +28,13 @@ const App = (props: AppStatePropsType) => {
                 <Navbar/>
                 <div className='app-wrapper-content'>
                     <Routes>
-                        <Route path='/profile/*' element={<Profile
-                            posts={props.state.profilePage.postsData}
-                            updateNewPostText={props.updateNewPostText}
-                            newPostText={props.state.profilePage.newPostText}
-                            addPost={props.addPost}/>}/>
+                        <Route path='/profile/*' element={
+                            <Profile
+                                posts={props.state.profilePage.postsData}
+                                newPostText={props.state.profilePage.newPostText}
+                                dispatch={props.dispatch.bind(props.state)} // needed bind(props.state)????
+                            />}
+                        />
                         <Route path='/dialogs/*' element={<Dialogs
                             dialogsData={props.state.dialogPage.dialogsData}
                             messageData={props.state.dialogPage.messageData}/>}/>
