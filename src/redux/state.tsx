@@ -10,14 +10,8 @@ export type StoreType = {
 
 export type GlobalActionType = AddPostActionType | UpdateNewPostActionType
 
-type AddPostActionType = {
-    type: 'ADD-POST'
-    textPost: string
-}
-type UpdateNewPostActionType = {
-    type: 'UPDATE-NEW-POST-TEXT'
-    newText: string
-}
+type AddPostActionType = ReturnType<typeof addPostAC>
+type UpdateNewPostActionType = ReturnType<typeof updateNewPostAC>
 
 export const store: StoreType = {
     _state: {
@@ -44,7 +38,7 @@ export const store: StoreType = {
                 {id: 2, message: 'Hi, how are you?', likesCount: '2'},
                 {id: 3, message: 'Hi, how are you my friend?', likesCount: '55'}
             ],
-            newPostText: 'IT-Kamasutra.com'
+            newPostText: 'Write your thoughts here'
         },
         sidebar: {}
     },
@@ -78,8 +72,22 @@ export const store: StoreType = {
             this._state.profilePage.newPostText = action.newText
             this._callSubscriber()
         }
-
     }
+}
+
+// Action Creators
+
+export const addPostAC = (textPost: string) => {
+    return {
+        type: 'ADD-POST',
+        textPost
+    } as const
+}
+export const updateNewPostAC = (newText: string) => {
+    return {
+        type: 'UPDATE-NEW-POST-TEXT',
+        newText
+    } as const
 }
 
 

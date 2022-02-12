@@ -1,7 +1,7 @@
 import React from "react";
 import s from './MyPosts.module.css';
 import Post, {PostType} from "./Post/Post";
-import {GlobalActionType} from "../../../redux/state";
+import {addPostAC, GlobalActionType, updateNewPostAC} from "../../../redux/state";
 
 
 export type MyPostsType = {
@@ -22,14 +22,16 @@ function MyPosts(props: MyPostsType) {
     const onClickHandler = () => {
         let textPost = newPostElement.current?.value
         if (textPost) {
-            props.dispatch({type: 'ADD-POST', textPost})
+            const action = addPostAC(textPost)
+            props.dispatch(action)
         }
     }
 
     const onChangeHandler = () => {
         let newText =  newPostElement.current?.value
         if(newText){
-            props.dispatch({type: 'UPDATE-NEW-POST-TEXT', newText})
+            const action = updateNewPostAC(newText)
+            props.dispatch(action)
         }
     }
 
