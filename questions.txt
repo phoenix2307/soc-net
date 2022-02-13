@@ -1,0 +1,3 @@
+Перенести StatePropsType из App в state.tsx
+
+

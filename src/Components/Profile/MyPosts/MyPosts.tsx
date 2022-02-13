@@ -39,7 +39,8 @@ function MyPosts(props: MyPostsType) {
         <div className={s.postBlock}>
             <h3>My posts</h3>
             <div>
-                <textarea onChange={onChangeHandler}
+                <textarea placeholder={'Write your thoughts here'}
+                          onChange={onChangeHandler}
                           ref={newPostElement}
                           value={props.newPostText}
                 >
