@@ -18,6 +18,14 @@ export type GlobalActionType = ReturnType<typeof addPostAC>
 
 export const store: StoreType = {
     _state: {
+        profilePage: {
+            postsData: [
+                {id: 1, message: 'Hi, how are you?', likesCount: '12'},
+                {id: 2, message: 'Hi, how are you?', likesCount: '2'},
+                {id: 3, message: 'Hi, how are you my friend?', likesCount: '55'}
+            ],
+            newPostText: ''
+        },
         dialogPage: {
             dialogsData: [
                 {id: 1, name: 'Dimych'},
@@ -35,14 +43,6 @@ export const store: StoreType = {
                 {id: 5, message: 'Yo-yoyo'}
             ],
             newMessageText: ''
-        },
-        profilePage: {
-            postsData: [
-                {id: 1, message: 'Hi, how are you?', likesCount: '12'},
-                {id: 2, message: 'Hi, how are you?', likesCount: '2'},
-                {id: 3, message: 'Hi, how are you my friend?', likesCount: '55'}
-            ],
-            newPostText: ''
         },
         sidebar: {}
     },
