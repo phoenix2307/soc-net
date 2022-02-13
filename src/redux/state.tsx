@@ -1,4 +1,7 @@
 import {StatePropsType} from "../App";
+import {profileReducer} from "./profileReducer";
+import {dialogsReducer} from "./dialogsReducer";
+import {sidebarReducer} from "./sidebarReducer";
 
 export type StoreType = {
     _state: StatePropsType
@@ -51,34 +54,16 @@ export const store: StoreType = {
     getState() {
         return this._state
     },
-    dispatch(action: any) { // need fixed
-        switch (action.type) {
-            case 'ADD-POST':
-                const newPost = {id: 4, message: action.textPost, likesCount: '0'}
-                this._state.profilePage.postsData.push(newPost)
-                this._state.profilePage.newPostText = ''
-                this._callSubscriber()
-                break;
-            case 'UPDATE-NEW-POST-TEXT':
-                this._state.profilePage.newPostText = action.newText
-                this._callSubscriber()
-                break;
-            case 'NEW-MESSAGE-TEXT':
-                this._state.dialogPage.newMessageText = action.newMessageBody
-                this._callSubscriber()
-                break;
-            case 'SEND-MESSAGE-TEXT':
-                const sentMessage = this._state.dialogPage.newMessageText
-                this._state.dialogPage.newMessageText = ''
-                this._state.dialogPage.messageData.push({id: 6, message: sentMessage})
-                this._callSubscriber()
-                break;
-        }
+    dispatch(action: GlobalActionType) {
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialogPage = dialogsReducer(this._state.dialogPage, action)
+        this._state.sidebar = sidebarReducer(this._state.sidebar, action)
+        this._callSubscriber()
     }
 }
 
-// Action Creators
-
+/*----------Action Creators--------------*/
+// profileReducer
 export const addPostAC = (textPost: string) => {
     return {
         type: 'ADD-POST',
@@ -91,6 +76,7 @@ export const updateNewPostAC = (newText: string) => {
         newText
     } as const
 }
+//dialogsReducer
 export const newMessageTextAC = (newMessageBody: string) => {
     return {
         type: 'NEW-MESSAGE-TEXT',
