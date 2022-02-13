@@ -8,7 +8,7 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import News from "./Components/News/News";
 import Music from "./Components/Music/Music";
 import Settings from "./Components/Settings/Settings";
-import {GlobalActionType} from "./redux/state";
+import {GlobalActionType} from "./redux/store";
 
 export type StatePropsType = {
     dialogPage: DialogPagePropsType

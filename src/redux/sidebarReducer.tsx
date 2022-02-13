@@ -1,6 +1,8 @@
-import {GlobalActionType} from "./state";
+import {GlobalActionType} from "./store";
 
-export const sidebarReducer = (state: {}, action: GlobalActionType) => {
+const initialState: {} = {}
+
+export const sidebarReducer = (state = initialState, action: GlobalActionType) => {
 
     return state
 }
