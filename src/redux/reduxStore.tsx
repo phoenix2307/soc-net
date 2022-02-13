@@ -8,6 +8,4 @@ const reducers = combineReducers({
     dialogPage: dialogsReducer,
     sidebar: sidebarReducer
 })
-
-
 export const store = createStore(reducers)
