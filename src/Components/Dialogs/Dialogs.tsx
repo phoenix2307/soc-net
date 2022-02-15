@@ -1,7 +1,7 @@
 import React, {ChangeEvent} from "react";
 import s from './Dialogs.module.css'
 import {NavLink} from "react-router-dom";
-import {GlobalActionType, newMessageTextAC, sendMessageTextAC} from "../../redux/store";
+import {GlobalActionType, newMessageTextAC, sendMessageTextAC} from "../../redux/reduxStore";
 
 // for STATE
 export type DialogPagePropsType = {

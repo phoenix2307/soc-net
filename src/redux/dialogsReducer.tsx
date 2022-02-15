@@ -1,4 +1,4 @@
-import {GlobalActionType} from "./store";
+import {GlobalActionType} from "./reduxStore";
 import {DialogPagePropsType} from "../Components/Dialogs/Dialogs";
 
 const initialState: DialogPagePropsType = {

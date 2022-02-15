@@ -1,4 +1,4 @@
-import {GlobalActionType} from "./store";
+import {GlobalActionType} from "./reduxStore";
 import {ProfilePropsType} from "../Components/Profile/Profile";
 
 const initialState: ProfilePropsType= {

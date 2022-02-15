@@ -1,4 +1,4 @@
-import {GlobalActionType} from "./store";
+import {GlobalActionType} from "./reduxStore";
 
 const initialState: {} = {}
 
