@@ -1,58 +1,87 @@
 import React from "react";
 import s from './MyPosts.module.css';
-import Post, {PostType} from "./Post/Post";
-import {addPostAC, GlobalActionType, updateNewPostAC} from "../../../redux/reduxStore";
+import {PostType} from "./Post/Post";
+import {addPostAC, updateNewPostAC} from "../../../redux/reduxStore";
+import {MyPosts} from "./MyPosts";
+import {connect} from "react-redux";
+import {Dispatch} from "redux";
+import {StatePropsType} from "../../../App";
 
+//----------------------copy is work ---------------------//
 
-export type MyPostsType = {
+// export type MyPostsContainerType = {
+//     posts: PostType[]
+//     newPostText: string
+//     dispatch: (action: GlobalActionType) => void
+// }
+//
+// export const MyPostsContainer = (props: MyPostsContainerType) => {
+//
+//
+//     const addPost = (textPost: string) => {
+//             props.dispatch(addPostAC(textPost))
+//     }
+//
+//     const changeText = (newText: string) => {
+//             props.dispatch(updateNewPostAC(newText))
+//     }
+//
+//     return (
+//         <MyPosts addPost={addPost}
+//                  changeText={changeText}
+//                  posts={props.posts}
+//                  newPostText={props.newPostText}/>
+//     )
+// }
+
+//---------------------- end copy ------------------------//
+
+export type MyPostsPropsType = MapStateToPropsType & MapDispatchToPropsType
+
+// export const MyPostsContainer = (props: MyPostsContainerType) => {
+//
+//
+//     const addPost = (textPost: string) => {
+//             props.dispatch(addPostAC(textPost))
+//     }
+//
+//     const changeText = (newText: string) => {
+//             props.dispatch(updateNewPostAC(newText))
+//     }
+//
+//     return (
+//         <MyPosts addPost={addPost}
+//                  changeText={changeText}
+//                  posts={props.posts}
+//                  newPostText={props.newPostText}/>
+//     )
+// }
+
+type MapStateToPropsType = {
     posts: PostType[]
     newPostText: string
-    dispatch: (action: GlobalActionType) => void
+}
+type MapDispatchToPropsType = {
+    addPost: (textPost: string) => void
+    changeText: (newText: string) => void
 }
 
-function MyPosts(props: MyPostsType) {
-
-    const postElements = props.posts.map(p => <Post
-        id={p.id}
-        message={p.message}
-        likesCount={p.likesCount}/>)
-
-    let newPostElement = React.createRef<HTMLTextAreaElement>()
-
-    const onClickHandler = () => {
-        let textPost = newPostElement.current?.value
-        if (textPost) {
-            props.dispatch(addPostAC(textPost))
-        }
+const mapStateToProps = (state: StatePropsType): MapStateToPropsType => {
+    return {
+        posts: state.profilePage.postsData,
+        newPostText: state.profilePage.newPostText
     }
-
-    const onChangeHandler = () => {
-        let newText =  newPostElement.current?.value
-        if(newText){
-            props.dispatch(updateNewPostAC(newText))
-        }
-    }
-
-    return (
-        <div className={s.postBlock}>
-            <h3>My posts</h3>
-            <div>
-                <textarea placeholder={'Write your thoughts here'}
-                          onChange={onChangeHandler}
-                          ref={newPostElement}
-                          value={props.newPostText}
-                >
-                </textarea>
-            </div>
-            <div>
-                <button onClick={onClickHandler}>Add post</button>
-            </div>
-            <div className={s.posts}>
-                {postElements}
-            </div>
-        </div>
-
-    )
 }
 
-export default MyPosts;
+const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
+    return {
+        addPost: (textPost: string) => {
+            dispatch(addPostAC(textPost))
+        },
+        changeText: (newText: string) => {
+            dispatch(updateNewPostAC(newText))
+        }
+    }
+}
+
+export const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts)

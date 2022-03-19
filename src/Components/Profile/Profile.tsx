@@ -1,9 +1,9 @@
 import React from "react";
 import s from './Profile.module.css';
-import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import {PostType} from "./MyPosts/Post/Post";
 import {GlobalActionType} from "../../redux/reduxStore";
+import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 
 
 export type ProfilePropsType = {
@@ -16,17 +16,12 @@ type PropsType = {
     newPostText: string
     dispatch: (action: GlobalActionType) => void
 }
-const Profile = (props: PropsType) => {
+export const Profile = (props: PropsType) => {
 
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts posts={props.posts}
-                     newPostText={props.newPostText}
-                     dispatch={props.dispatch}
-            />
+            <MyPostsContainer/>
         </div>
     )
 }
-
-export default Profile;

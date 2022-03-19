@@ -3,15 +3,27 @@ import './index.css';
 import App from "./App";
 import ReactDOM from "react-dom";
 import {store} from "./redux/reduxStore";
+import {Provider} from "react-redux";
 
-export const rerenderEntireTree = () => {
-    ReactDOM.render(
-        <App state={store.getState()}
-             dispatch={store.dispatch.bind(store)}/>,
-        document.getElementById('root')
-    );
-}
+//----------------------------------------//
+// export const rerenderEntireTree = () => {
+//
+//     ReactDOM.render(
+//         <Provider store={store}>
+//             <App />
+//         </Provider>,
+//
+//         document.getElementById('root')
+//     );
+// }
+//
+// rerenderEntireTree();
+//----------------------------------------//
 
-rerenderEntireTree();
-store.subscribe(rerenderEntireTree)
+ReactDOM.render(
+    <Provider store={store}>
+        <App />
+    </Provider>,
 
+    document.getElementById('root')
+);

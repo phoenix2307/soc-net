@@ -2,21 +2,20 @@ import {combineReducers, createStore} from "redux";
 import {profileReducer} from "./profileReducer";
 import {dialogsReducer} from "./dialogsReducer";
 import {sidebarReducer} from "./sidebarReducer";
-import {StatePropsType} from "../App";
 
-export type StoreType = { // где мы используем этот тип? закинул из старого store
-    _state: StatePropsType
-    _callSubscriber: () => void
-    getState: () => StatePropsType
-    subscribe: (callback: () => void) => void
-    dispatch: (action: GlobalActionType) => void
-}
-
+// export type StoreType = { // где мы используем этот тип? закинул из старого store...
+//     _state: StatePropsType
+//     _callSubscriber: () => void
+//     getState: () => StatePropsType
+//     subscribe: (callback: () => void) => void
+//     dispatch: (action: GlobalActionType) => void
+// }
+/*------------------- Action Creators & types ------------------------------*/
 export type GlobalActionType = ReturnType<typeof addPostAC>
     | ReturnType<typeof updateNewPostAC>
     | ReturnType<typeof newMessageTextAC>
     | ReturnType<typeof sendMessageTextAC>
-/*----------Action Creators--------------*/
+
 // profileReducer
 export const addPostAC = (textPost: string) => {
     return {
@@ -43,9 +42,13 @@ export const sendMessageTextAC = () => {
     } as const
 }
 
+/*-------------------------------------------------------------------------*/
+
+export type ReducersType = ReturnType<typeof reducers>
 const reducers = combineReducers({
     profilePage: profileReducer,
     dialogPage: dialogsReducer,
     sidebar: sidebarReducer
 })
+
 export const store = createStore(reducers)

@@ -1,35 +1,36 @@
 import React from "react";
 import s from './MyPosts.module.css';
-import Post, {PostType} from "./Post/Post";
-import {addPostAC, GlobalActionType, updateNewPostAC} from "../../../redux/reduxStore";
+import Post from "./Post/Post";
+import {MyPostsPropsType} from "./MyPostsContainer";
 
+// export type MyPostsType = {
+//     addPost: (textPost: string) => void
+//     changeText: (newText: string) => void
+//     posts: PostType[]
+//     newPostText: string
+// }
 
-export type MyPostsType = {
-    posts: PostType[]
-    newPostText: string
-    dispatch: (action: GlobalActionType) => void
-}
-
-function MyPosts(props: MyPostsType) {
+export const MyPosts = (props: MyPostsPropsType) => {
 
     const postElements = props.posts.map(p => <Post
+        key={p.id}
         id={p.id}
         message={p.message}
         likesCount={p.likesCount}/>)
 
     let newPostElement = React.createRef<HTMLTextAreaElement>()
 
-    const onClickHandler = () => {
+    const addPostCallback = () => {
         let textPost = newPostElement.current?.value
         if (textPost) {
-            props.dispatch(addPostAC(textPost))
+            props.addPost(textPost)
         }
     }
 
     const onChangeHandler = () => {
         let newText =  newPostElement.current?.value
         if(newText){
-            props.dispatch(updateNewPostAC(newText))
+            props.changeText(newText)
         }
     }
 
@@ -45,7 +46,7 @@ function MyPosts(props: MyPostsType) {
                 </textarea>
             </div>
             <div>
-                <button onClick={onClickHandler}>Add post</button>
+                <button onClick={addPostCallback}>Add post</button>
             </div>
             <div className={s.posts}>
                 {postElements}
@@ -54,5 +55,3 @@ function MyPosts(props: MyPostsType) {
 
     )
 }
-
-export default MyPosts;
